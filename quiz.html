@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>SAT Quiz</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .timer {
+      font-size: 32px;
+      font-weight: bold;
+      color: #667eea;
+    }
+
+    .progress {
+      font-size: 18px;
+      color: #6b7280;
+    }
+
+    .quiz-card {
+      background: white;
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .question-text {
+      font-size: 20px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      color: #1f2937;
+    }
+
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .choice {
+      padding: 16px 20px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .choice:hover {
+      border-color: #667eea;
+      background: #f3f4f6;
+    }
+
+    .choice-letter {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #4b5563;
+    }
+
+    .choice.selected {
+      border-color: #667eea;
+      background: #eef2ff;
+    }
+
+    .choice.selected .choice-letter {
+      background: #667eea;
+      color: white;
+    }
+
+    .choice.correct {
+      border-color: #10b981;
+      background: #d1fae5;
+    }
+
+    .choice.correct .choice-letter {
+      background: #10b981;
+      color: white;
+    }
+
+    .choice.incorrect {
+      border-color: #ef4444;
+      background: #fee2e2;
+    }
+
+    .choice.incorrect .choice-letter {
+      background: #ef4444;
+      color: white;
+    }
+
+    .choice.disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    .feedback {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .feedback.correct {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .feedback.incorrect {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .next-btn {
+      width: 100%;
+      padding: 16px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: background 0.2s;
+    }
+
+    .next-btn:hover {
+      background: #5568d3;
+    }
+
+    .next-btn:disabled {
+      background: #d1d5db;
+      cursor: not-allowed;
+    }
+
+    .results {
+      text-align: center;
+    }
+
+    .results h2 {
+      font-size: 32px;
+      color: #1f2937;
+      margin-bottom: 16px;
+    }
+
+    .score {
+      font-size: 48px;
+      font-weight: bold;
+      color: #667eea;
+      margin: 24px 0;
+    }
+
+    .restart-btn {
+      padding: 16px 32px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .restart-btn:hover {
+      background: #5568d3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="timer" id="timer">00:00</div>
+      <div class="progress" id="progress">Question 1 of 10</div>
+    </div>
+
+    <div class="quiz-card" id="quizCard">
+      <div class="question-text" id="questionText"></div>
+      <div class="choices" id="choices"></div>
+      <div id="feedback"></div>
+      <button class="next-btn" id="nextBtn" style="display: none;">Next Question</button>
+    </div>
+  </div>
+
+  <script src="quiz.js"></script>
+</body>
+</html>

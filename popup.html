@@ -1,16 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <style>
+    body {
+      width: 400px;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      margin: 0;
+    }
+    h2 {
+      margin: 0 0 16px 0;
+      font-size: 18px;
+      color: #333;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .primary-btn {
+      background: #2563eb;
+      color: white;
+    }
+    .primary-btn:hover {
+      background: #1d4ed8;
+    }
+    .secondary-btn {
+      background: #10b981;
+      color: white;
+    }
+    .secondary-btn:hover {
+      background: #059669;
+    }
+    .danger-btn {
+      background: #ef4444;
+      color: white;
+    }
+    .danger-btn:hover {
+      background: #dc2626;
+    }
+    .disabled {
+      background: #d1d5db;
+      cursor: not-allowed;
+    }
+    .disabled:hover {
+      background: #d1d5db;
+    }
+    .status {
+      padding: 12px;
+      margin: 12px 0;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .info {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+    .success {
+      background: #d1fae5;
+      color: #065f46;
+    }
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+    .question-count {
+      text-align: center;
+      color: #6b7280;
+      font-size: 14px;
+      margin: 12px 0;
+    }
+    #status {
+      min-height: 20px;
+    }
+  </style>
 </head>
 <body>
-    <h2>Interactive Quiz</h2>
-    <div id="quiz-container">
-        <h3 id="question"></h3>
-        <ul id="answers"></ul>
-        <div id="timer"></div>
-        <div id="feedback"></div>
-    </div>
-    <script src="popup.js"></script>
+  <h2>SAT Quiz Builder</h2>
+  
+  <div class="question-count">
+    <strong id="questionCount">0</strong> questions saved
+  </div>
+
+  <button id="extractBtn" class="primary-btn">
+    Add Current Question
+  </button>
+
+  <button id="startQuizBtn" class="secondary-btn disabled">
+    Start Quiz
+  </button>
+
+  <button id="clearBtn" class="danger-btn">
+    Clear All Questions
+  </button>
+
+  <div id="status"></div>
+
+  <script src="popup.js"></script>
 </body>
 </html>

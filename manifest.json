@@ -1,15 +1,30 @@
 {
   "manifest_version": 3,
-  "name": "Interactive Quiz Builder",
+  "name": "SAT Quiz Builder",
   "version": "1.0",
-  "description": "Create interactive quizzes with your own questions and a timer.",
-  "permissions": ["storage"],
+  "description": "Extract SAT questions and create interactive quizzes",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://satsuitequestionbank.collegeboard.org/*"
+  ],
   "action": {
     "default_popup": "popup.html",
-    "default_icon": {
-      "16": "icon16.png",
-      "48": "icon48.png",
-      "128": "icon128.png"
+    "default_title": "SAT Quiz Builder"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://satsuitequestionbank.collegeboard.org/*"],
+      "js": ["content.js"]
     }
-  }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["quiz.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }

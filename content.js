@@ -18,7 +18,8 @@ function extractCurrentQuestion() {
     timestamp: new Date().toISOString(),
     questionText: '',
     choices: [],
-    correctAnswer: null
+    correctAnswer: null,
+    rationale: ''
   };
 
   // Extract question from the modal if it's open
@@ -52,15 +53,19 @@ function extractCurrentQuestion() {
       });
     }
 
-    // Try to detect the correct answer from the rationale if it's revealed
-    const rationale = modal.querySelector('.rationale');
-    if (rationale && rationale.style.display !== 'none') {
-      const rationaleText = rationale.innerText;
-      // Look for "Choice X is the best answer"
-      const match = rationaleText.match(/Choice ([A-D]) is the best answer/i);
+    // Get the rationale - it's always visible on the page
+    const rationaleDiv = modal.querySelector('.rationale');
+    if (rationaleDiv) {
+      const rationaleText = rationaleDiv.innerText.trim();
+      
+      // Look for "Choice X is correct" or "Choice X is the best answer"
+      const match = rationaleText.match(/Choice ([A-D]) is (correct|the best answer)/i);
       if (match) {
         questionData.correctAnswer = match[1].toUpperCase();
       }
+      
+      // Store the full rationale text
+      questionData.rationale = rationaleText;
     }
   }
 

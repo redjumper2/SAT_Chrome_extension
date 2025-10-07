@@ -12,51 +12,175 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: #e8eaed;
       min-height: 100vh;
-      padding: 20px;
+      display: flex;
+      flex-direction: column;
     }
 
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .header {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
+    .top-bar {
+      background: #2c3e50;
+      color: white;
+      padding: 12px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .directions {
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .timer-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
 
     .timer {
-      font-size: 32px;
-      font-weight: bold;
-      color: #667eea;
-    }
-
-    .progress {
       font-size: 18px;
-      color: #6b7280;
+      font-weight: 600;
     }
 
-    .quiz-card {
+    .hide-btn {
       background: white;
-      padding: 32px;
-      border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
+      color: #2c3e50;
+      border: none;
+      padding: 6px 16px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .tools-bar {
+      background: white;
+      padding: 8px 20px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .tool-btn {
+      background: none;
+      border: none;
+      font-size: 12px;
+      color: #666;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .preview-banner {
+      background: #1a237e;
+      color: white;
+      text-align: center;
+      padding: 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .main-content {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .passage-section {
+      flex: 1;
+      background: white;
+      padding: 40px;
+      overflow-y: auto;
+      border-right: 2px solid #999;
+    }
+
+    .passage-text {
+      max-width: 650px;
+      font-size: 16px;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    .question-section {
+      flex: 1;
+      background: #f5f5f5;
+      padding: 40px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .question-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .question-number {
+      background: #000;
+      color: white;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .mark-review {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid #999;
+      border-radius: 4px;
+      cursor: pointer;
+      background: white;
+      font-size: 13px;
+    }
+
+    .mark-review input {
+      width: 16px;
+      height: 16px;
+    }
+
+    .abc-btn {
+      margin-left: auto;
+      background: #4285f4;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
     }
 
     .question-text {
-      font-size: 20px;
+      font-size: 15px;
       line-height: 1.6;
-      margin-bottom: 24px;
-      color: #1f2937;
+      color: #333;
+      margin-bottom: 30px;
     }
 
     .choices {
@@ -66,157 +190,215 @@
     }
 
     .choice {
-      padding: 16px 20px;
-      border: 2px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      padding: 14px 18px;
+      border: 2px solid #999;
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.2s;
-      display: flex;
-      align-items: center;
+      background: white;
       gap: 12px;
     }
 
     .choice:hover {
-      border-color: #667eea;
-      background: #f3f4f6;
+      background: #f9f9f9;
+    }
+
+    .choice.selected {
+      border-color: #4285f4;
+      background: #e8f0fe;
+    }
+
+    .choice.correct {
+      border-color: #0f9d58;
+      background: #e6f4ea;
+    }
+
+    .choice.incorrect {
+      border-color: #d93025;
+      background: #fce8e6;
     }
 
     .choice-letter {
       width: 32px;
       height: 32px;
+      min-width: 32px;
+      border: 2px solid #666;
       border-radius: 50%;
-      background: #e5e7eb;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
-      color: #4b5563;
-    }
-
-    .choice.selected {
-      border-color: #667eea;
-      background: #eef2ff;
+      font-weight: 600;
+      font-size: 14px;
+      background: white;
     }
 
     .choice.selected .choice-letter {
-      background: #667eea;
+      border-color: #4285f4;
+      background: #4285f4;
       color: white;
-    }
-
-    .choice.correct {
-      border-color: #10b981;
-      background: #d1fae5;
     }
 
     .choice.correct .choice-letter {
-      background: #10b981;
+      border-color: #0f9d58;
+      background: #0f9d58;
       color: white;
-    }
-
-    .choice.incorrect {
-      border-color: #ef4444;
-      background: #fee2e2;
     }
 
     .choice.incorrect .choice-letter {
-      background: #ef4444;
+      border-color: #d93025;
+      background: #d93025;
       color: white;
     }
 
-    .choice.disabled {
-      cursor: not-allowed;
-      opacity: 0.7;
+    .choice-text {
+      flex: 1;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .choice-indicator {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+    }
+
+    .choice.selected .choice-indicator {
+      border-color: #4285f4;
+      background: #4285f4;
     }
 
     .feedback {
       margin-top: 20px;
-      padding: 16px;
-      border-radius: 8px;
-      font-size: 16px;
+      padding: 12px 18px;
+      border-radius: 6px;
+      font-size: 14px;
       font-weight: 600;
-      text-align: center;
     }
 
     .feedback.correct {
-      background: #d1fae5;
-      color: #065f46;
+      background: #e6f4ea;
+      color: #137333;
     }
 
     .feedback.incorrect {
-      background: #fee2e2;
-      color: #991b1b;
+      background: #fce8e6;
+      color: #c5221f;
+    }
+
+    .bottom-bar {
+      background: #2c3e50;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .user-name {
+      color: white;
+      font-size: 14px;
+    }
+
+    .question-nav {
+      color: white;
+      font-size: 14px;
+      background: #000;
+      padding: 8px 16px;
+      border-radius: 20px;
     }
 
     .next-btn {
-      width: 100%;
-      padding: 16px;
-      background: #667eea;
+      background: #4285f4;
       color: white;
       border: none;
-      border-radius: 8px;
-      font-size: 16px;
+      padding: 10px 32px;
+      border-radius: 20px;
+      font-size: 14px;
       font-weight: 600;
       cursor: pointer;
-      margin-top: 16px;
       transition: background 0.2s;
     }
 
     .next-btn:hover {
-      background: #5568d3;
+      background: #3367d6;
     }
 
     .next-btn:disabled {
-      background: #d1d5db;
+      background: #999;
       cursor: not-allowed;
     }
 
     .results {
       text-align: center;
+      padding: 60px;
+      background: white;
+      margin: 40px;
+      border-radius: 8px;
     }
 
     .results h2 {
       font-size: 32px;
-      color: #1f2937;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
     .score {
-      font-size: 48px;
+      font-size: 64px;
       font-weight: bold;
-      color: #667eea;
-      margin: 24px 0;
-    }
-
-    .restart-btn {
-      padding: 16px 32px;
-      background: #667eea;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .restart-btn:hover {
-      background: #5568d3;
+      color: #4285f4;
+      margin: 30px 0;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="timer" id="timer">00:00</div>
-      <div class="progress" id="progress">Question 1 of 10</div>
+  <div class="top-bar">
+    <div class="section-info">
+      <div class="section-title">Section I</div>
+      <div class="directions">Directions ▼</div>
+    </div>
+    <div class="timer-section">
+      <div class="timer" id="timer">0:00</div>
+      <button class="hide-btn">Hide</button>
+    </div>
+  </div>
+
+  <div class="tools-bar">
+    <button class="tool-btn">🖍️ Highlights & Notes</button>
+    <button class="tool-btn">🧮 Calculator</button>
+    <button class="tool-btn">📖 Reference</button>
+    <button class="tool-btn">⋯ More</button>
+  </div>
+
+  <div class="preview-banner">CollegeBoard SAT Quiz</div>
+
+  <div class="main-content">
+    <div class="passage-section">
+      <div class="passage-text" id="passageText"></div>
     </div>
 
-    <div class="quiz-card" id="quizCard">
+    <div class="question-section">
+      <div class="question-header">
+        <div class="question-number" id="questionNumber">1</div>
+        <label class="mark-review">
+          <input type="checkbox" id="markReview">
+          <span>Mark for Review</span>
+        </label>
+        <button class="abc-btn">ABC</button>
+      </div>
+
       <div class="question-text" id="questionText"></div>
+
       <div class="choices" id="choices"></div>
+
       <div id="feedback"></div>
-      <button class="next-btn" id="nextBtn" style="display: none;">Next Question</button>
     </div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="user-name">Student</div>
+    <div class="question-nav" id="questionNav">Question 1 of 15</div>
+    <button class="next-btn" id="nextBtn">Next</button>
   </div>
 
   <script src="quiz.js"></script>

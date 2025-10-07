@@ -44,12 +44,22 @@ function loadQuestion() {
   const question = questions[currentQuestionIndex];
   selectedAnswer = null;
   
-  // Update progress
-  document.getElementById('progress').textContent = 
+  // Update question number and navigation
+  document.getElementById('questionNumber').textContent = currentQuestionIndex + 1;
+  document.getElementById('questionNav').textContent = 
     `Question ${currentQuestionIndex + 1} of ${questions.length}`;
   
-  // Display question
-  document.getElementById('questionText').textContent = question.questionText;
+  // Reset mark for review
+  document.getElementById('markReview').checked = false;
+  
+  // Split question text into passage and question
+  const questionParts = question.questionText.split('\n\n');
+  const passageText = questionParts.length > 1 ? questionParts.slice(0, -1).join('\n\n') : '';
+  const actualQuestion = questionParts[questionParts.length - 1];
+  
+  // Display passage (if exists) and question
+  document.getElementById('passageText').textContent = passageText || 'No passage for this question.';
+  document.getElementById('questionText').textContent = actualQuestion;
   
   // Display choices
   const choicesContainer = document.getElementById('choices');
@@ -61,15 +71,16 @@ function loadQuestion() {
     choiceDiv.innerHTML = `
       <div class="choice-letter">${choice.id}</div>
       <div class="choice-text">${choice.text}</div>
+      <div class="choice-indicator"></div>
     `;
     
     choiceDiv.addEventListener('click', () => selectAnswer(choice.id, choiceDiv, question));
     choicesContainer.appendChild(choiceDiv);
   });
   
-  // Hide feedback and next button
+  // Hide feedback and enable next button
   document.getElementById('feedback').innerHTML = '';
-  document.getElementById('nextBtn').style.display = 'none';
+  document.getElementById('nextBtn').disabled = true;
 }
 
 function selectAnswer(answerId, choiceElement, question) {
@@ -105,12 +116,13 @@ function selectAnswer(answerId, choiceElement, question) {
   feedback.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
   feedback.textContent = isCorrect ? '✓ Correct!' : '✗ Incorrect';
   
-  // Show next button
-  document.getElementById('nextBtn').style.display = 'block';
+  // Enable next button
+  document.getElementById('nextBtn').disabled = false;
 }
 
 // Next button handler
 document.getElementById('nextBtn').addEventListener('click', () => {
+  if (selectedAnswer === null) return;
   currentQuestionIndex++;
   loadQuestion();
 });
@@ -125,27 +137,32 @@ function showResults() {
   
   const percentage = Math.round((score / questions.length) * 100);
   
-  document.getElementById('quizCard').innerHTML = `
+  document.querySelector('.header').style.display = 'none';
+  
+  document.querySelector('.container').innerHTML = `
     <div class="results">
       <h2>Quiz Complete!</h2>
       <div class="score">${score} / ${questions.length}</div>
-      <p style="font-size: 24px; color: #6b7280; margin-bottom: 12px;">${percentage}% Correct</p>
-      <p style="font-size: 18px; color: #9ca3af;">Time: ${timeStr}</p>
+      <p style="font-size: 28px; font-weight: 600; color: #4a7ba7; margin: 20px 0;">${percentage}%</p>
+      <p style="font-size: 18px; color: #6b7280;">Time: ${timeStr}</p>
       <button class="restart-btn" onclick="restartQuiz()">Restart Quiz</button>
     </div>
   `;
 }
 
 function restartQuiz() {
+  document.querySelector('.header').style.display = 'flex';
   startQuiz();
 }
 
 function showNoQuestionsMessage() {
   clearInterval(timerInterval);
-  document.getElementById('quizCard').innerHTML = `
+  document.querySelector('.header').style.display = 'none';
+  
+  document.querySelector('.container').innerHTML = `
     <div class="results">
       <h2>No Questions Available</h2>
-      <p style="font-size: 18px; color: #6b7280; margin: 24px 0;">
+      <p style="font-size: 18px; color: #6b7280; margin: 30px 0;">
         Please add questions from the SAT Question Bank first.
       </p>
       <button class="restart-btn" onclick="window.close()">Close</button>
